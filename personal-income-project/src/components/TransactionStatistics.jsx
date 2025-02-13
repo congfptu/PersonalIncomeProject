@@ -131,78 +131,79 @@ const TransactionStatistics = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="w-screen h- flex flex-col flex-grow items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-20 mt-60 pb-12">
-        {/* Tabs thống kê */}
-        <div className="flex gap-4 justify-center w-[1000px] max-w-lg">
-          <button
-            className={`flex-1 py-3 rounded-lg font-semibold transition-all ${
-              activeTab === "year"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-700 text-gray-400"
-            }`}
-            onClick={() => setActiveTab("year")}
-          >
-            Thống kê theo năm
-          </button>
-          <button
-            className={`flex-1 px-12 py-3 rounded-lg font-semibold transition-all ${
-              activeTab === "month"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-700 text-gray-400"
-            }`}
-            onClick={() => setActiveTab("month")}
-          >
-            Thống kê theo tháng
-          </button>
-        </div>
+      <div className="w-screen h- flex flex-col flex-grow items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-20 mt-40 pb-12">
+        <div className="flex flex-col items-center gap-2 w-full max-w-2xl p-4 bg-gray-800 rounded-lg">
+          {/* Tabs và DatePicker */}
+          <div className="flex justify-between w-full gap-4">
+            <div className="flex flex-1 gap-2">
+              <button
+                className={`flex-1 px-4 py-2 rounded-l-md font-medium transition-all ${
+                  activeTab === "year"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-600 text-gray-300"
+                }`}
+                onClick={() => setActiveTab("year")}
+              >
+                Theo năm
+              </button>
+              <button
+                className={`flex-1 px-4 py-2 rounded-r-md font-medium transition-all ${
+                  activeTab === "month"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-600 text-gray-300"
+                }`}
+                onClick={() => setActiveTab("month")}
+              >
+                Theo tháng
+              </button>
+            </div>
 
-        {/* DatePicker */}
-        <div className="mt-6 text-center w-full">
-          <DatePicker
-            className="h-[50px] w-80"
-            picker={activeTab === "year" ? "year" : "month"}
-            onChange={handleDateChange}
-            value={
-              activeTab === "year"
-                ? dayjs().year(year)
-                : dayjs()
-                    .year(year)
-                    .month(month - 1)
-            }
-            style={{
-              backgroundColor: "#111827",
-              color: "white",
-              fontWeight: "bold",
-              justifyContent: "center",
-              border: "1px solid #555",
-              textAlign: "center",
-            }}
-            allowClear={false}
-          />
-        </div>
+            {/* DatePicker */}
+            <DatePicker
+              className="h-10 w-40 text-center"
+              picker={activeTab === "year" ? "year" : "month"}
+              onChange={handleDateChange}
+              value={
+                activeTab === "year"
+                  ? dayjs().year(year)
+                  : dayjs()
+                      .year(year)
+                      .month(month - 1)
+              }
+              style={{
+                backgroundColor: "#1f2937",
+                color: "white",
+                fontWeight: "bold",
+                border: "1px solid #555",
+                borderRadius: "6px",
+              }}
+              allowClear={false}
+            />
+          </div>
 
-        {/* Tabs chọn Chi Tiêu / Thu Nhập */}
-        <div className="flex gap-4 justify-center w-full max-w-lg mt-4">
-          <button
-            className={`flex-1 px-12 py-3 rounded-lg font-semibold transition-all ${
-              activeChart === "spend"
-                ? "bg-red-500 text-white"
-                : "bg-gray-700 text-gray-400"
-            }`}
-            onClick={() => setActiveChart("spend")}
-          >
-            Chi Tiêu
-          </button>
-          <button
-            className={`flex-1 px-12 py-3 rounded-lg font-semibold transition-all ${
-              activeChart === "collect"
-                ? "bg-green-500 text-white"
-                : "bg-gray-700 text-gray-400"
-            }`}
-            onClick={() => setActiveChart("collect")}
-          >
-            Thu Nhập
-          </button>
+          {/* Tabs chọn Chi Tiêu / Thu Nhập */}
+          <div className="flex w-full gap-2">
+            <button
+              className={`flex-1 px-4 py-2 rounded-r-md font-medium transition-all ${
+                activeChart === "collect"
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-600 text-gray-300"
+              }`}
+              onClick={() => setActiveChart("collect")}
+            >
+              Thu Nhập
+            </button>
+            <button
+              className={`flex-1 px-4 py-2 rounded-l-md font-medium transition-all ${
+                activeChart === "spend"
+                  ? "bg-red-500 text-white"
+                  : "bg-gray-600 text-gray-300"
+              }`}
+              onClick={() => setActiveChart("spend")}
+            >
+              Chi Tiêu
+            </button>
+          </div>
         </div>
 
         {/* Biểu đồ Chi Tiêu hoặc Thu Nhập */}
