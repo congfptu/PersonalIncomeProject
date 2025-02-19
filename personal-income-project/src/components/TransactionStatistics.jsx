@@ -85,7 +85,7 @@ const TransactionStatistics = () => {
     try {
       const response = await getTransactionStatisticYear(0, selectedYear);
       if (response.data.code === 200) {
-        setStatistics(response.data.dataList[0]);
+        setStatistics(response.data.dataList[0] || {});
       }
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu thống kê năm:", error);
@@ -105,7 +105,7 @@ const TransactionStatistics = () => {
         selectedYear
       );
       if (response.data.code === 200) {
-        setStatistics(response.data.dataList[0]);
+        setStatistics(response.data.dataList[0] || {});
       }
     } catch (error) {
       console.error("Lỗi khi lấy dữ liệu thống kê tháng:", error);
@@ -127,7 +127,8 @@ const TransactionStatistics = () => {
     return (
       <Spin size="large" style={{ display: "block", margin: "50px auto" }} />
     );
-
+    const spendData = statistics?.listSpend || [];
+    const collectData = statistics?.listCollect || [];
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -234,8 +235,8 @@ const TransactionStatistics = () => {
                 <Pie
                   data={
                     activeChart === "spend"
-                      ? statistics.listSpend
-                      : statistics.listCollect
+                      ? spendData
+                      : collectData
                   }
                   dataKey="percentage"
                   nameKey="categoryName"
@@ -244,15 +245,9 @@ const TransactionStatistics = () => {
                   outerRadius={160}
                   label
                 >
-                  {(activeChart === "spend"
-                    ? statistics.listSpend
-                    : statistics.listCollect
-                  ).map((entry, index) => (
-                    <Cell
-                      key={`cell-${activeChart}-${index}`}
-                      fill={entry.color}
-                    />
-                  ))}
+                   {(activeChart === "spend" ? spendData : collectData).map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry?.color || "#ccc" } />
+                ))}
                 </Pie>
                 <Tooltip />
               </PieChart>
