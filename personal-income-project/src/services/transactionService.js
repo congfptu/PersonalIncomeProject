@@ -66,3 +66,17 @@ export const updateTransaction = async (transactionData) => {
     throw error;
   }
 };
+
+// Xóa danh mục
+export const getTransactionCategory = async (categoryInfo) => {
+  try {
+    const response = await axiosInstance.post(
+      `Transaction/get-transaction-category`,
+      categoryInfo
+    );
+    return response;
+  } catch (error) {
+    console.error("Lỗi khi xóa danh mục", error);
+    throw error;
+  }
+};

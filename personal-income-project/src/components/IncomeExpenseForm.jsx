@@ -74,10 +74,9 @@ export default function IncomeExpenseForm() {
     setSelectedCategory(null);
     setAmount("");
     setDescription("");
-    setDate(new Date().toISOString().split("T")[0]); // ✅ Reset về ngày hiện tại
+    setDate(new Date().toISOString().split("T")[0]);
   };
 
-  // Gọi API để lấy danh mục thu và chi
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -101,7 +100,6 @@ export default function IncomeExpenseForm() {
 
   const categories = isIncome ? incomeCategories : expenseCategories;
 
-  // Hàm xử lý gửi dữ liệu giao dịch
   const handleSubmit = async () => {
     if (!selectedCategory) {
       message.warning("Vui lòng chọn danh mục!");
@@ -111,10 +109,10 @@ export default function IncomeExpenseForm() {
       message.warning("Số tiền phải lớn hơn 0!");
       return;
     }
-    const numericAmount = parseInt(amount.replace(/\./g, ""), 10); // Chuyển về số nguyên trước khi gửi API
+    const numericAmount = parseInt(amount.replace(/\./g, ""), 10);
     const transactionData = {
       categoryId: selectedCategory,
-      transactionType: isIncome ? 1 : 0, // 1: Thu nhập, 0: Chi tiêu
+      transactionType: isIncome ? 1 : 0,
       amount: parseFloat(numericAmount),
       description,
       date: `${date}T00:00:00.000Z`,
@@ -147,7 +145,6 @@ export default function IncomeExpenseForm() {
             {isIncome ? "Nhập Khoản Thu" : "Nhập Khoản Chi"}
           </h2>
 
-          {/* Chuyển đổi giữa thu nhập và chi tiêu */}
           <div className="flex w-full mb-4">
             <button
               className={`flex-1 p-3 rounded-l-lg border border-gray-700 ${
@@ -155,7 +152,7 @@ export default function IncomeExpenseForm() {
               }`}
               onClick={() => {
                 setIsIncome(true);
-                resetForm(); // ✅ Xóa dữ liệu cũ khi chuyển tab
+                resetForm();
               }}
             >
               Thu nhập
@@ -166,14 +163,13 @@ export default function IncomeExpenseForm() {
               }`}
               onClick={() => {
                 setIsIncome(false);
-                resetForm(); // ✅ Xóa dữ liệu cũ khi chuyển tab
+                resetForm();
               }}
             >
               Chi tiêu
             </button>
           </div>
 
-          {/* Ngày nhập */}
           <label className="block w-full mb-2">Ngày:</label>
           <input
             type="date"
@@ -182,7 +178,6 @@ export default function IncomeExpenseForm() {
             className="w-full p-3 mb-4 bg-gray-800 rounded border border-gray-700"
           />
 
-          {/* Ghi chú */}
           <label className="block w-full mb-2">Ghi chú:</label>
           <input
             type="text"
@@ -192,14 +187,13 @@ export default function IncomeExpenseForm() {
             className="w-full p-3 mb-4 bg-gray-800 rounded border border-gray-700"
           />
 
-          {/* Số tiền */}
           <label className="block w-full mb-2">Số tiền:</label>
           <input
             type="text"
             value={amount}
             onChange={(e) => {
-              let value = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
-              setAmount(value ? parseInt(value).toLocaleString("vi-VN") : ""); // Định dạng tiền VND
+              let value = e.target.value.replace(/\D/g, "");
+              setAmount(value ? parseInt(value).toLocaleString("vi-VN") : "");
             }}
             className="w-full p-3 mb-4 bg-gray-800 rounded border border-gray-700"
           />
@@ -221,7 +215,6 @@ export default function IncomeExpenseForm() {
                   }`}
                   onClick={() => setSelectedCategory(cat.id)}
                 >
-                  {/* ✅ Chỉ biểu tượng có màu từ cat.color */}
                   <span
                     className="text-lg"
                     style={{ color: cat.color || "#ffffff" }}
@@ -229,7 +222,6 @@ export default function IncomeExpenseForm() {
                     {iconMap[cat.icon] || "📁"}
                   </span>
 
-                  {/* ✅ Giữ màu chữ mặc định để dễ đọc */}
                   <span className="text-sm text-white">{cat.name}</span>
                 </button>
               ))
@@ -238,7 +230,6 @@ export default function IncomeExpenseForm() {
             )}
           </div>
 
-          {/* Nút nhập khoản */}
           <button
             className="w-full p-4 bg-blue-600 rounded-lg hover:bg-blue-700"
             onClick={handleSubmit}

@@ -114,9 +114,12 @@ button:focus-visible {
   border-color: #dee3eb !important; /* Khi focus hoặc hover, viền đổi thành xanh */
 }
 
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+.ant-btn:hover {
+  background: none !important; /* Không đổi nền */
+  color: inherit !important; /* Không đổi màu chữ */
+  box-shadow: none !important; /* Không có hiệu ứng */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

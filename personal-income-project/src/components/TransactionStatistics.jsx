@@ -127,8 +127,8 @@ const TransactionStatistics = () => {
     return (
       <Spin size="large" style={{ display: "block", margin: "50px auto" }} />
     );
-    const spendData = statistics?.listSpend || [];
-    const collectData = statistics?.listCollect || [];
+  const spendData = statistics?.listSpend || [];
+  const collectData = statistics?.listCollect || [];
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -233,11 +233,7 @@ const TransactionStatistics = () => {
               </Title>
               <PieChart width={500} height={500}>
                 <Pie
-                  data={
-                    activeChart === "spend"
-                      ? spendData
-                      : collectData
-                  }
+                  data={activeChart === "spend" ? spendData : collectData}
                   dataKey="percentage"
                   nameKey="categoryName"
                   cx="50%"
@@ -245,9 +241,14 @@ const TransactionStatistics = () => {
                   outerRadius={160}
                   label
                 >
-                   {(activeChart === "spend" ? spendData : collectData).map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry?.color || "#ccc" } />
-                ))}
+                  {(activeChart === "spend" ? spendData : collectData).map(
+                    (entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={entry?.color || "#ccc"}
+                      />
+                    )
+                  )}
                 </Pie>
                 <Tooltip />
               </PieChart>

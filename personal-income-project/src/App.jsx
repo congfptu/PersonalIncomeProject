@@ -5,6 +5,7 @@ import CategoryForm from "./components/CategoryForm.jsx";
 import CategoryManage from "./components/CategoryManage.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import TransactionStatistic from "./components/TransactionStatistics.jsx";
+import TransactionCategoryStatistic from "./components/TransactionCategoryStatistics.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import {
   BrowserRouter as Router,
@@ -25,6 +26,10 @@ function App() {
           <Route path="/income-expense-form" element={<IncomeExpenseForm />} />
           <Route path="/register-category" element={<CategoryForm />} />
           <Route path="/manage-category" element={<CategoryManage />} />
+          <Route
+            path="/transaction-category-statistics"
+            element={<TransactionCategoryStatistic />}
+          />
           <Route
             path="/transaction-statistics-year"
             element={<TransactionStatistic />}
