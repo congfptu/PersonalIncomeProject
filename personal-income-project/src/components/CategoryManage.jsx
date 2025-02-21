@@ -238,6 +238,9 @@ const CategoryList = () => {
       <div className="flex flex-col h-screen">
         <div className="w-screen flex flex-grow justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black">
           <div className="w-full max-w-7xl min-h-[600px]">
+            <h2 className="text-2xl font-semibold mb-4 text-center">
+              Quản lý danh mục
+            </h2>
             {/* Nút chọn Thu nhập / Chi tiêu */}
             <div className="flex justify-center gap-4 mb-6">
               <button
@@ -264,7 +267,7 @@ const CategoryList = () => {
             </div>
 
             {/* Danh mục */}
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-5 gap-6">
               {(selectedType === "income"
                 ? incomeCategories
                 : expenseCategories
