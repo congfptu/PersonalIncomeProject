@@ -140,7 +140,7 @@ export default function IncomeExpenseForm() {
     <div className="flex flex-col min-h-screen flex-grow">
       <Header className="relative z-10" />
       <div className="w-screen flex flex-grow justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black mt-40 pt-20 pb-20">
-        <div className="w-[1000px] p-8 bg-gray-900 text-white rounded-lg shadow-lg flex flex-col items-center">
+        <div className="w-[1000px] min-h-[750px] p-8 bg-gray-900 text-white rounded-lg shadow-lg flex flex-col items-center">
           <h2 className="text-2xl font-semibold mb-4 text-center">
             {isIncome ? "Nhập Khoản Thu" : "Nhập Khoản Chi"}
           </h2>

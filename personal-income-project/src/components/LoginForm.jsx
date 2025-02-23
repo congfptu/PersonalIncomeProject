@@ -48,7 +48,6 @@ export default function LoginForm() {
       } else {
         sessionStorage.setItem("access_token", data.token);
         sessionStorage.setItem("user_name", data.userName);
-        message.success("Đăng nhập thành công!");
         navigate("/expense-tracker");
       }
     } catch (error) {

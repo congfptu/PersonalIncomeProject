@@ -15,6 +15,7 @@ import { getCategory } from "../services/categoryServices";
 import { getTransactionCategory } from "../services/transactionService";
 import * as Icons from "@ant-design/icons";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const { Option } = Select;
 
@@ -138,137 +139,159 @@ const TransactionChart = () => {
   );
 
   return (
-    <div className="p-6 bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen text-white w-screen mt-20">
-      <Header />
-      <div className="flex flex-col items-center p-6 bg-gray-900 rounded-lg mb-6 w-3/4 mx-auto mt-12">
-        <div className="flex justify-center space-x-4 mb-4">
-          <Button
-            className={`px-28 py-5 font-semibold border-none outline-none
+    <div className="mt-40">
+      <div className="p-6 bg-gradient-to-br from-gray-900 via-gray-800 to-black min-h-screen text-white w-screen mt-20">
+        <Header />
+
+        <div className="flex flex-col items-center p-6 bg-gray-900 rounded-lg mb-6 w-3/4 mx-auto mt-12">
+          <h2 className="text-2xl font-semibold mb-4 text-center">
+            Tổng quan tài chính theo danh mục
+          </h2>
+          <div className="flex justify-center space-x-4 mb-4">
+            <Button
+              className={`px-28 py-5 font-semibold border-none outline-none
       ${
         activeTab === "income"
           ? "bg-green-600 text-white hover:!bg-green-600 focus:!bg-green-600"
           : "bg-gray-500 text-white hover:!bg-gray-500 focus:!bg-gray-500"
       }`}
-            onClick={() => setActiveTab("income")}
-          >
-            Thu Nhập
-          </Button>
+              onClick={() => setActiveTab("income")}
+            >
+              Thu Nhập
+            </Button>
 
-          <Button
-            className={`px-28 py-5 font-semibold border-none outline-none
+            <Button
+              className={`px-28 py-5 font-semibold border-none outline-none
             ${
               activeTab === "expense"
-                ? "bg-red-600 text-white hover:!bg-red-600 focus:!bg-red-600"
+                ? "bg-red-700 text-white hover:!bg-red-700 focus:!bg-red-700"
                 : "bg-gray-500 text-white hover:!bg-gray-500 focus:!bg-gray-500"
             }`}
-            onClick={() => setActiveTab("expense")}
-          >
-            Chi Tiêu
-          </Button>
-        </div>
+              onClick={() => setActiveTab("expense")}
+            >
+              Chi Tiêu
+            </Button>
+          </div>
 
-        <div className="flex justify-center space-x-4 mb-4">
-          <Button
-            className={`px-24 py-2 font-semibold transition duration-200
+          <div className="flex justify-center space-x-4 mb-4">
+            <Button
+              className={`px-24 py-2 font-semibold transition duration-200
     ${
       chartType === "year"
         ? "bg-blue-500 text-white hover:!bg-blue-500 focus:!bg-blue-500 active:!bg-blue-500"
         : "bg-gray-600 text-white hover:!bg-gray-600 focus:!bg-gray-600 active:!bg-gray-600"
     }`}
-            onClick={() => setChartType("year")}
-          >
-            Theo năm
-          </Button>
+              onClick={() => setChartType("year")}
+            >
+              Theo năm
+            </Button>
 
-          <Button
-            className={`px-24 py-2 font-semibold transition duration-200
+            <Button
+              className={`px-24 py-2 font-semibold transition duration-200
     ${
       chartType === "month"
         ? "bg-blue-500 text-white hover:!bg-blue-500 focus:!bg-blue-500 active:!bg-blue-500"
         : "bg-gray-600 text-white hover:!bg-gray-600 focus:!bg-gray-600 active:!bg-gray-600"
     }`}
-            onClick={() => setChartType("month")}
-          >
-            Theo tháng
-          </Button>
+              onClick={() => setChartType("month")}
+            >
+              Theo tháng
+            </Button>
 
-          <DatePicker
-            picker={chartType === "year" ? "year" : "month"}
-            value={
-              chartType === "year"
-                ? dayjs().year(selectedYear)
-                : dayjs(
-                    `${selectedYear}-${String(selectedMonth).padStart(2, "0")}`,
-                    "YYYY-MM"
-                  )
-            }
-            onChange={(date) => {
-              if (date) {
-                setSelectedYear(date.year());
-                if (chartType === "month") setSelectedMonth(date.month() + 1);
+            <DatePicker
+              picker={chartType === "year" ? "year" : "month"}
+              value={
+                chartType === "year"
+                  ? dayjs().year(selectedYear)
+                  : dayjs(
+                      `${selectedYear}-${String(selectedMonth).padStart(
+                        2,
+                        "0"
+                      )}`,
+                      "YYYY-MM"
+                    )
               }
-            }}
-            locale={locale}
-            className="bg-gray-700 text-white hover:bg-gray-600 transition duration-200 focus:ring-0 outline-none shadow-none"
-            allowClear={false}
-          />
-        </div>
-
-        <div className="flex justify-center w-1/3">
-          <Select
-            value={selectedCategory}
-            onChange={setSelectedCategory}
-            className="w-full bg-gray-700 text-white hover:bg-gray-600 transition duration-200 focus:ring-0 outline-none shadow-none"
-          >
-            {filteredCategories.map((category) => {
-              const IconComponent =
-                Icons[category.icon] || Icons.QuestionCircleOutlined;
-              return (
-                <Option key={category.id} value={category.id}>
-                  <span className="flex items-center">
-                    <IconComponent
-                      className="mr-2"
-                      style={{ color: category.color }}
-                    />
-                    {category.name}
-                  </span>
-                </Option>
-              );
-            })}
-          </Select>
-        </div>
-      </div>
-
-      <div className="items-center p-6 bg-gray-900 rounded-lg mb-6 w-3/4 mx-auto">
-        {loading ? (
-          <div className="flex justify-center items-center h-80">
-            <Spin size="large" />
-          </div>
-        ) : (
-          <ResponsiveContainer width="100%" height={500} className="p-4">
-            <BarChart data={chartData}>
-              <XAxis
-                dataKey="label"
-                interval={0}
-                angle={-30}
-                textAnchor="end"
-                height={50}
-              />
-              <YAxis />
-              <Tooltip
-                cursor={{ fill: "transparent" }}
-                formatter={(value) =>
-                  value.toLocaleString("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  })
+              onChange={(date) => {
+                if (date) {
+                  setSelectedYear(date.year());
+                  if (chartType === "month") setSelectedMonth(date.month() + 1);
                 }
-              />
-              <Bar dataKey="total" fill="#4CAF50" barSize={50} />
-            </BarChart>
-          </ResponsiveContainer>
-        )}
+              }}
+              locale={locale}
+              className="bg-gray-700 text-white hover:bg-gray-600 transition duration-200 focus:ring-0 outline-none shadow-none"
+              allowClear={false}
+            />
+          </div>
+
+          <div className="flex justify-center w-1/3">
+            <Select
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              className="w-full bg-gray-700 text-white hover:bg-gray-600 transition duration-200 focus:ring-0 outline-none shadow-none"
+            >
+              {filteredCategories.map((category) => {
+                const IconComponent =
+                  Icons[category.icon] || Icons.QuestionCircleOutlined;
+                return (
+                  <Option key={category.id} value={category.id}>
+                    <span className="flex items-center">
+                      <IconComponent
+                        className="mr-2"
+                        style={{ color: category.color }}
+                      />
+                      {category.name}
+                    </span>
+                  </Option>
+                );
+              })}
+            </Select>
+          </div>
+        </div>
+        <div className="items-center p-6 bg-gray-900 rounded-lg mb-6 w-3/4 mx-auto">
+          {loading ? (
+            <div className="flex justify-center items-center h-80">
+              <Spin size="large" />
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height={500} className="p-4">
+              <BarChart data={chartData}>
+                <XAxis
+                  dataKey="label"
+                  interval={0}
+                  angle={-30}
+                  textAnchor="end"
+                  height={50}
+                  tick={{ fill: "white" }} // Đổi màu chữ trục X thành trắng
+                />
+                <YAxis
+                  tick={{ fill: "white" }} // Đổi màu chữ trục Y thành trắng
+                  tickFormatter={(value) =>
+                    value.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  }
+                />
+                <Tooltip
+                  cursor={{ fill: "transparent" }}
+                  formatter={(value) =>
+                    value.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  }
+                />
+                <Bar
+                  dataKey="total"
+                  fill={activeTab === "income" ? "#24bdb5" : "#F44336"}
+                  barSize={50}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

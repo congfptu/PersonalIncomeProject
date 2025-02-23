@@ -13,6 +13,7 @@ import {
   Input,
   Button,
   Select,
+  DatePicker,
 } from "antd";
 import dayjs from "dayjs";
 import {
@@ -251,7 +252,7 @@ const ExpenseTracker = () => {
     }, 0);
 
     return total !== 0 ? (
-      <Text strong style={{ color: total > 0 ? "blue" : "red" }}>
+      <Text strong style={{ color: total > 0 ? "green" : "red" }}>
         {total.toLocaleString()}đ
       </Text>
     ) : null;
@@ -262,6 +263,9 @@ const ExpenseTracker = () => {
       <div className="w-screen flex justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-black flex-grow">
         <Header />
         <div style={{ padding: "20px", maxWidth: "95%", margin: "0 auto" }}>
+          <h2 className="text-2xl font-semibold mb-4 text-center mt-20">
+            Tổng quan tài chính theo danh mục
+          </h2>
           {loading ? (
             <Spin
               size="large"
@@ -276,12 +280,24 @@ const ExpenseTracker = () => {
               >
                 <Card style={{ flex: 1 }}>
                   <Title level={3}>📅 Lịch thu chi</Title>
+                  {/* Bộ chọn tháng/năm thay thế mặc định */}
+                  <div className="flex justify-center mb-4">
+                    <DatePicker
+                      picker="month"
+                      value={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                      format="MM/YYYY"
+                      allowClear={false} // Không cho phép xóa ngày
+                    />
+                  </div>
+
                   <Calendar
                     fullscreen={false}
                     mode={mode}
                     value={selectedDate}
                     onSelect={setSelectedDate}
                     onPanelChange={setSelectedDate}
+                    headerRender={() => null}
                     dateCellRender={mode === "month" ? dateCellRender : null}
                   />
                 </Card>
@@ -289,10 +305,10 @@ const ExpenseTracker = () => {
                   <Title level={3}>📊 Bảng tổng quan</Title>
                   <Text strong>
                     <MoneyCollectOutlined
-                      style={{ color: "blue", marginRight: "8px" }}
+                      style={{ color: "green", marginRight: "8px" }}
                     />
                     Thu nhập:{" "}
-                    <span style={{ color: "blue" }}>
+                    <span style={{ color: "green" }}>
                       {summary.totalIncome.toLocaleString()}đ
                     </span>
                   </Text>
@@ -308,13 +324,13 @@ const ExpenseTracker = () => {
                   </Text>
                   <br />
                   <Text strong>
-                    Số dư còn lại:{" "}
+                    Tổng kết thu chi:{" "}
                     <span
                       style={{
                         color: summary.remainingBalance >= 0 ? "green" : "red",
                       }}
                     >
-                      {summary.remainingBalance.toLocaleString()}đ
+                      {summary.totalIncome - summary.totalExpense}đ
                     </span>
                   </Text>
                 </Card>
