@@ -5,7 +5,7 @@ const getToken = () => sessionStorage.getItem("access_token");
 
 // Tạo Axios instance
 const axiosInstance = axios.create({
-  baseURL: "https://localhost:5001/api",
+  baseURL: "http://localhost:5000/api",
 });
 
 // Thêm Interceptor để tự động gắn token vào header
