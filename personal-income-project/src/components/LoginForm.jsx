@@ -22,8 +22,8 @@ export default function LoginForm() {
     setErrorMessage("");
     try {
       const endpoint = isLogin
-        ? "https://localhost:5001/api/auth/login"
-        : "https://localhost:5001/api/auth/register";
+        ? "https://localhost:5000/api/auth/login"
+        : "https://localhost:5000/api/auth/register";
       const requestBody = isLogin
         ? { username, password }
         : { username, email, password };
