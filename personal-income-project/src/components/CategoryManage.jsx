@@ -101,26 +101,18 @@ const CategoryList = () => {
     CarFilled: <CarFilled />,
   };
   const colorGrid = [
-    // 🌟 Tông màu VÀNG - CAM
     ["#FFEB3B", "#FFF9C4", "#FFD54F", "#FFC107", "#FF9800", "#FF6F00"],
 
-    // 🔥 Tông màu ĐỎ
     ["#FFCDD2", "#FF5722", "#F44336", "#C62828", "#AD1457", "#F06292"],
 
-    // 🌸 Tông màu HỒNG - TÍM
     ["#F8BBD0", "#E91E63", "#9C27B0", "#BA68C8", "#E1BEE7", "#673AB7"],
 
-    // 🌊 Tông màu XANH DƯƠNG
     ["#BBDEFB", "#64B5F6", "#2196F3", "#0D47A1", "#283593", "#D1C4E9"],
-
-    // 🍃 Tông màu XANH LÁ
     ["#C8E6C9", "#81C784", "#4CAF50", "#1B5E20", "#A1887F", "#FF9800"],
 
-    // ⚫ Tông màu XÁM - ĐEN
     ["#6A1B9A", "#424242", "#0D47A1"],
   ];
 
-  // Danh sách màu sắc
   const colorOptions = [
     "#FFEB3B",
     "#FFCDD2",
@@ -216,7 +208,7 @@ const CategoryList = () => {
         try {
           await deleteCategory(selectedCategory.id);
           message.success("Danh mục đã được xóa thành công!");
-          handleCloseModal(); // Đóng popup và tải lại danh mục
+          handleCloseModal();
         } catch (error) {
           message.error("Lỗi khi xóa danh mục!");
         } finally {
@@ -241,7 +233,6 @@ const CategoryList = () => {
             <h2 className="text-2xl font-semibold mb-4 text-center">
               Quản lý danh mục
             </h2>
-            {/* Nút chọn Thu nhập / Chi tiêu */}
             <div className="flex justify-center gap-4 mb-6">
               <button
                 className={`px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 ${
@@ -266,7 +257,6 @@ const CategoryList = () => {
               </button>
             </div>
 
-            {/* Danh mục */}
             <div className="grid grid-cols-5 gap-6">
               {(selectedType === "income"
                 ? incomeCategories
@@ -282,7 +272,6 @@ const CategoryList = () => {
                   }}
                   onClick={() => handleOpenModal(category)}
                 >
-                  {/* ✅ Chỉ icon có màu từ category.color */}
                   <span
                     style={{
                       color: category.color || "#ffffff",
@@ -294,7 +283,6 @@ const CategoryList = () => {
                       : expenseIcons[category.icon]}
                   </span>
 
-                  {/* ✅ Text luôn màu trắng */}
                   <span className="mt-1 text-lg text-white">
                     {category.name || "Không tên"}
                   </span>
@@ -311,7 +299,7 @@ const CategoryList = () => {
           }
           open={isModalOpen}
           onCancel={handleCloseModal}
-          width={800} // Mở rộng popup
+          width={800}
           footer={[
             <Button
               key="delete"
@@ -336,7 +324,6 @@ const CategoryList = () => {
         >
           {selectedCategory && (
             <div className="flex flex-col gap-4 bg-gray-900 p-6 rounded-lg">
-              {/* Nhập tên danh mục */}
               <label className="text-white font-semibold">Tên danh mục</label>
               <Input
                 placeholder="Nhập tên danh mục"
@@ -350,7 +337,6 @@ const CategoryList = () => {
                 className="bg-gray-800 text-white p-3 rounded-md border border-gray-700"
               />
 
-              {/* Biểu tượng */}
               <label className="text-white font-semibold mt-3">
                 Biểu tượng
               </label>
@@ -376,7 +362,6 @@ const CategoryList = () => {
                 ))}
               </div>
 
-              {/* Màu sắc */}
               <label className="text-white font-semibold mt-3">Màu sắc</label>
               <div className="grid grid-cols-8 gap-3 bg-gray-800 p-4 rounded-lg border border-gray-700">
                 {colorOptions.map((color, colIndex) => (

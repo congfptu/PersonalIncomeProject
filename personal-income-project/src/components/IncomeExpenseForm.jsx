@@ -32,7 +32,6 @@ import {
   HomeFilled,
 } from "@ant-design/icons";
 
-// Map biểu tượng từ API sang Ant Design icons
 const iconMap = {
   DollarCircleOutlined: <DollarCircleOutlined />,
   ShoppingCartOutlined: <ShoppingCartOutlined />,
@@ -197,7 +196,7 @@ export default function IncomeExpenseForm() {
             }}
             className="w-full p-3 mb-4 bg-gray-800 rounded border border-gray-700"
           />
-          {/* Danh mục */}
+
           <label className="block w-full mb-2">Danh mục:</label>
           <div className="grid grid-cols-5 gap-4 mb-12 w-full auto-rows-fr">
             {loading ? (

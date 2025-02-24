@@ -8,7 +8,7 @@ const Header = () => {
   const [activeTab, setActiveTab] = useState("expense");
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedDropdownItem, setSelectedDropdownItem] = useState(""); // ✅ Lưu mục active trong dropdown
+  const [selectedDropdownItem, setSelectedDropdownItem] = useState("");
 
   const dropdownRef = useRef(null);
 
@@ -26,7 +26,7 @@ const Header = () => {
       location.pathname.includes("/transaction-category-statistics")
     ) {
       setActiveTab("more");
-      setSelectedDropdownItem(location.pathname); // ✅ Giữ trạng thái active mục con
+      setSelectedDropdownItem(location.pathname);
     }
   }, [location.pathname]);
 
@@ -42,9 +42,9 @@ const Header = () => {
 
   const handleNavigation = (path) => {
     setActiveTab("more");
-    setSelectedDropdownItem(path); // ✅ Giữ trạng thái active mục con
+    setSelectedDropdownItem(path);
     navigate(path);
-    setIsDropdownOpen(false); // Đóng dropdown sau khi chọn
+    setIsDropdownOpen(false);
   };
 
   const handleLogout = () => {
@@ -86,7 +86,6 @@ const Header = () => {
             💰 Nhập thu chi
           </button>
 
-          {/* ✅ Dropdown Menu - Giữ trạng thái active mục con */}
           <div className="relative" ref={dropdownRef}>
             <button
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
@@ -154,7 +153,6 @@ const Header = () => {
             )}
           </div>
 
-          {/* User Profile & Logout */}
           <div className="relative">
             <button
               className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-all"

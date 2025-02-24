@@ -16,7 +16,7 @@ const PrivateRoute = () => {
       .catch(() => setIsAuthenticated(false));
   }, [token]);
 
-  if (isAuthenticated === null) return <div>Loading...</div>; // Hiển thị trạng thái loading khi đang kiểm tra token
+  if (isAuthenticated === null) return <div>Loading...</div>;
 
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
 };

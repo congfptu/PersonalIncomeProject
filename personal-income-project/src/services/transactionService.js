@@ -1,6 +1,5 @@
 import axiosInstance from "./axiosInstance";
 
-// Tạo danh mục mới
 export const createTransaction = async (transactionData) => {
   try {
     const response = await axiosInstance.post(
@@ -14,7 +13,6 @@ export const createTransaction = async (transactionData) => {
   }
 };
 
-// Lấy danh sách danh mục
 export const getTransactions = async (month, year) => {
   try {
     const response = await axiosInstance.get(
@@ -27,7 +25,6 @@ export const getTransactions = async (month, year) => {
   }
 };
 
-// Lấy danh sách danh mục
 export const getTransactionStatisticYear = async (month, year) => {
   try {
     const response = await axiosInstance.get(
@@ -40,7 +37,6 @@ export const getTransactionStatisticYear = async (month, year) => {
   }
 };
 
-// Xóa danh mục
 export const deleteTransaction = async (transactionId) => {
   try {
     const response = await axiosInstance.post(
@@ -53,7 +49,6 @@ export const deleteTransaction = async (transactionId) => {
   }
 };
 
-// Xóa danh mục
 export const updateTransaction = async (transactionData) => {
   try {
     const response = await axiosInstance.post(
@@ -67,7 +62,6 @@ export const updateTransaction = async (transactionData) => {
   }
 };
 
-// Xóa danh mục
 export const getTransactionCategory = async (categoryInfo) => {
   try {
     const response = await axiosInstance.post(

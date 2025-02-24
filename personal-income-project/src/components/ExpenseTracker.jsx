@@ -116,7 +116,7 @@ const ExpenseTracker = () => {
     TrophyFilled: <TrophyFilled />,
     CarFilled: <CarFilled />,
   };
-  // Gọi API lấy danh mục khi mở popup
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -160,7 +160,6 @@ const ExpenseTracker = () => {
     fetchTransactions();
   }, [selectedDate, reload]);
 
-  // Khi click vào giao dịch -> Mở popup
   const handleOpenModal = (transaction) => {
     setSelectedTransaction(transaction);
     setIsModalOpen(true);
@@ -186,10 +185,10 @@ const ExpenseTracker = () => {
         newDate: selectedTransaction.date,
       };
 
-      await updateTransaction(payload); // Gọi API cập nhật giao dịch
+      await updateTransaction(payload);
       message.success("Cập nhật giao dịch thành công!");
       handleCloseModal();
-      setReload((prev) => !prev); // Cập nhật lại danh sách giao dịch
+      setReload((prev) => !prev);
     } catch (error) {
       message.error("Lỗi khi cập nhật giao dịch!");
     } finally {
@@ -197,7 +196,6 @@ const ExpenseTracker = () => {
     }
   };
 
-  // Xử lý xóa giao dịch với xác nhận
   const handleDeleteTransaction = () => {
     if (!selectedTransaction) return;
 
@@ -224,7 +222,6 @@ const ExpenseTracker = () => {
     });
   };
 
-  // Nhóm giao dịch theo ngày
   const groupedTransactions = transactions.reduce((acc, curr) => {
     const dateKey = curr.date.split("T")[0];
     if (!acc[dateKey]) acc[dateKey] = [];
@@ -232,7 +229,6 @@ const ExpenseTracker = () => {
     return acc;
   }, {});
 
-  // Hiển thị tổng tiền trong lịch
   const dateCellRender = (value) => {
     const dateString = value.format("YYYY-MM-DD");
     if (
@@ -280,14 +276,13 @@ const ExpenseTracker = () => {
               >
                 <Card style={{ flex: 1 }}>
                   <Title level={3}>📅 Lịch thu chi</Title>
-                  {/* Bộ chọn tháng/năm thay thế mặc định */}
                   <div className="flex justify-center mb-4">
                     <DatePicker
                       picker="month"
                       value={selectedDate}
                       onChange={(date) => setSelectedDate(date)}
                       format="MM/YYYY"
-                      allowClear={false} // Không cho phép xóa ngày
+                      allowClear={false}
                     />
                   </div>
 
@@ -335,8 +330,6 @@ const ExpenseTracker = () => {
                   </Text>
                 </Card>
               </Col>
-
-              {/* Danh sách giao dịch */}
               <Col
                 span={8}
                 style={{
@@ -349,22 +342,21 @@ const ExpenseTracker = () => {
                   style={{
                     flex: 1,
                     fontSize: "18px",
-                    minHeight: "662px", // ✅ Giữ chiều cao cố định
-                    backgroundColor: "#1a1d2b", // ✅ Màu nền tối
-                    border: "1px solid #2e3548", // ✅ Viền giống form
-                    color: "#ffffff", // ✅ Màu chữ trắng
-                    borderRadius: "12px", // ✅ Bo góc nhẹ
+                    minHeight: "662px",
+                    backgroundColor: "#1a1d2b",
+                    border: "1px solid #2e3548",
+                    color: "#ffffff",
+                    borderRadius: "12px",
                     display: "flex",
                     flexDirection: "column",
 
-                    overflow: "hidden", // 🔹 Chỉ ẩn cuộn cho cả khối, không ảnh hưởng nội dung cuộn bên trong
+                    overflow: "hidden",
                   }}
                 >
-                  {/* ✅ Tiêu đề cố định */}
                   <div
                     style={{
                       top: "0",
-                      backgroundColor: "#1a1d2b", // ✅ Giữ nguyên màu nền
+                      backgroundColor: "#1a1d2b",
                       zIndex: 100,
                       padding: "16px",
                       borderBottom: "1px solid #2e3548",
@@ -375,13 +367,12 @@ const ExpenseTracker = () => {
                     </Title>
                   </div>
 
-                  {/* ✅ Vùng danh sách cuộn */}
                   <div
                     style={{
                       flex: 1,
-                      overflowY: "auto", // ✅ Cho phép cuộn dọc
+                      overflowY: "auto",
                       padding: "16px",
-                      maxHeight: "550px", // ✅ Đảm bảo có không gian để cuộn
+                      maxHeight: "550px",
                     }}
                   >
                     <List
@@ -394,7 +385,7 @@ const ExpenseTracker = () => {
                             style={{
                               width: "100%",
                               fontSize: "16px",
-                              backgroundColor: "#252a3a", // ✅ Màu nền item tối hơn card chính
+                              backgroundColor: "#252a3a",
                               border: "1px solid #2e3548",
                               color: "#ffffff",
                               borderRadius: "8px",
@@ -410,7 +401,7 @@ const ExpenseTracker = () => {
                                   onClick={() => handleOpenModal(item)}
                                   style={{
                                     cursor: "pointer",
-                                    backgroundColor: "#2c3144", // ✅ Màu nền tối hơn chút nữa
+                                    backgroundColor: "#2c3144",
                                     padding: "10px",
                                     marginBottom: "5px",
                                     borderRadius: "8px",
@@ -418,37 +409,33 @@ const ExpenseTracker = () => {
                                       "transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease",
                                     display: "flex",
                                     justifyContent: "space-between",
-                                    border: "1px solid #3a3f56", // ✅ Viền nhẹ
+                                    border: "1px solid #3a3f56",
                                     color: "#ffffff",
-
-                                    /* ✅ Hiệu ứng mặc định */
                                     transform: "translateY(0)",
                                     boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.2)",
                                   }}
                                   onMouseEnter={(e) => {
                                     e.currentTarget.style.transform =
-                                      "translateY(-2px)"; // ✅ Đẩy lên nhẹ khi hover
+                                      "translateY(-2px)";
                                     e.currentTarget.style.backgroundColor =
-                                      "#374151"; // ✅ Đổi màu nền
+                                      "#374151";
                                     e.currentTarget.style.boxShadow =
-                                      "0px 8px 15px rgba(0, 0, 0, 0.3)"; // ✅ Tạo bóng mượt
+                                      "0px 8px 15px rgba(0, 0, 0, 0.3)";
                                   }}
                                   onMouseLeave={(e) => {
                                     e.currentTarget.style.transform =
-                                      "translateY(0)"; // ✅ Trở về vị trí cũ
+                                      "translateY(0)";
                                     e.currentTarget.style.backgroundColor =
-                                      "#2c3144"; // ✅ Trở về màu gốc
+                                      "#2c3144";
                                     e.currentTarget.style.boxShadow =
-                                      "0px 0px 5px rgba(0, 0, 0, 0.2)"; // ✅ Giảm bóng đổ
+                                      "0px 0px 5px rgba(0, 0, 0, 0.2)";
                                   }}
                                 >
-                                  {/* ✅ Icon danh mục */}
-
                                   <Text
                                     style={{
                                       color: "#ffffff",
                                       display: "flex",
-                                      alignItems: "center", // ✅ Căn giữa icon & text
+                                      alignItems: "center",
                                     }}
                                   >
                                     <span
@@ -458,7 +445,7 @@ const ExpenseTracker = () => {
                                         paddingRight: 15,
                                         display: "flex",
                                         alignItems: "center",
-                                        width: "30px", // ✅ Đảm bảo khoảng trống cố định ngay cả khi không có icon
+                                        width: "30px",
                                         justifyContent: "center",
                                       }}
                                     >
@@ -468,7 +455,6 @@ const ExpenseTracker = () => {
                                           ? incomeIcons[item.icon]
                                           : expenseIcons[item.icon]
                                         : null}{" "}
-                                      {/* ✅ Nếu không có icon thì giữ khoảng trống, tránh lệch dòng */}
                                     </span>
                                     {item.categoryName}{" "}
                                     {item.description
@@ -481,8 +467,8 @@ const ExpenseTracker = () => {
                                       color:
                                         item.transactionTypeDescription ===
                                         "Income"
-                                          ? "#4CAF50" // ✅ Màu xanh nếu là thu nhập
-                                          : "#F44336", // ✅ Màu đỏ nếu là chi tiêu
+                                          ? "#4CAF50"
+                                          : "#F44336",
                                     }}
                                   >
                                     {item.amount.toLocaleString()}đ
@@ -501,7 +487,6 @@ const ExpenseTracker = () => {
           )}
         </div>
 
-        {/* Popup Chỉnh Sửa Giao Dịch */}
         <Modal
           title={
             <span className="text-white text-lg font-bold">
@@ -510,7 +495,7 @@ const ExpenseTracker = () => {
           }
           open={isModalOpen}
           onCancel={handleCloseModal}
-          width={750} // Mở rộng modal
+          width={750}
           footer={[
             <Button
               key="delete"
@@ -534,7 +519,6 @@ const ExpenseTracker = () => {
         >
           {selectedTransaction && (
             <div className="flex flex-col gap-6 text-white">
-              {/* Chọn danh mục */}
               <div>
                 <label className="text-white font-semibold text-sm mb-2 block">
                   Danh mục
@@ -548,9 +532,9 @@ const ExpenseTracker = () => {
                       key={category.id}
                       className={`w-[150px] h-[90px] p-5 rounded-lg flex flex-col items-center justify-center transition-all duration-300 text-white text-lg ${
                         selectedTransaction.categoryId === category.id
-                          ? "border-4 border-green-500 scale-105" // ✅ Highlight danh mục đã chọn
+                          ? "border-4 border-green-500 scale-105"
                           : "border border-gray-600 hover:border-white"
-                      } bg-gray-800`} // ✅ Nền tối cố định
+                      } bg-gray-800`}
                       onClick={() =>
                         setSelectedTransaction({
                           ...selectedTransaction,
@@ -558,7 +542,6 @@ const ExpenseTracker = () => {
                         })
                       }
                     >
-                      {/* ✅ Icon có màu theo category.color */}
                       <span
                         style={{
                           color: category.color || "#ffffff",
@@ -571,7 +554,6 @@ const ExpenseTracker = () => {
                           : expenseIcons[category.icon]}
                       </span>
 
-                      {/* ✅ Text màu trắng */}
                       <span className="mt-1 text-base font-semibold text-white text-center">
                         {category.name}
                       </span>
@@ -580,22 +562,21 @@ const ExpenseTracker = () => {
                 </div>
               </div>
 
-              {/* Chỉnh sửa số tiền */}
               <div>
                 <label className="text-white font-semibold text-sm mb-2 block">
                   Số tiền
                 </label>
                 <Input
-                  type="text" // ✅ Dùng text để tránh lỗi khi format
+                  type="text"
                   value={
                     selectedTransaction.amount
                       ? new Intl.NumberFormat("vi-VN").format(
                           selectedTransaction.amount
-                        ) // ✅ Giữ dấu phân cách, bỏ "₫"
+                        )
                       : ""
                   }
                   onChange={(e) => {
-                    const rawValue = e.target.value.replace(/\D/g, ""); // ✅ Chỉ lấy số
+                    const rawValue = e.target.value.replace(/\D/g, "");
                     setSelectedTransaction({
                       ...selectedTransaction,
                       amount: rawValue ? parseFloat(rawValue) : 0,
@@ -605,17 +586,16 @@ const ExpenseTracker = () => {
                 />
               </div>
 
-              {/* Chỉnh sửa ghi chú */}
               <div>
                 <label className="text-white font-semibold text-sm mb-2">
                   Ghi chú
                 </label>
                 <Input.TextArea
-                  value={selectedTransaction.description} // ✅ Đổi từ description thành note
+                  value={selectedTransaction.description}
                   onChange={(e) =>
                     setSelectedTransaction({
                       ...selectedTransaction,
-                      description: e.target.value, // ✅ Đảm bảo đồng bộ với state
+                      description: e.target.value,
                     })
                   }
                   className="p-4 rounded-md border border-gray-600 bg-gray-800 text-white w-full text-lg"

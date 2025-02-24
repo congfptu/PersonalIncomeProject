@@ -12,20 +12,15 @@ const ErrorPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-      {/* Biểu tượng cảnh báo */}
       <ExclamationCircleOutlined
         style={{ fontSize: "100px", color: "#ff4d4f" }}
       />
-
-      {/* Tiêu đề lớn hơn, dễ nhìn hơn */}
       <h1 className="text-5xl font-bold mt-5">Ôi không! Trang không tồn tại</h1>
 
-      {/* Phụ đề với màu sắc dịu nhẹ */}
       <p className="text-lg opacity-80 mt-2">
         Có vẻ như bạn đã nhập sai đường dẫn hoặc trang này không còn tồn tại.
       </p>
 
-      {/* Các nút điều hướng */}
       <div className="mt-6 flex gap-4">
         <Button
           type="primary"

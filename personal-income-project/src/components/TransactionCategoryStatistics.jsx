@@ -70,7 +70,6 @@ const TransactionChart = () => {
     }
 
     setLoading(true);
-    // 🛠️ Xử lý dữ liệu để đảm bảo đủ 12 tháng hoặc đủ ngày trong tháng
     const formatChartData = (transactions) => {
       if (chartType === "year") {
         return Array.from({ length: 12 }, (_, i) => ({
@@ -261,10 +260,10 @@ const TransactionChart = () => {
                   angle={-30}
                   textAnchor="end"
                   height={50}
-                  tick={{ fill: "white" }} // Đổi màu chữ trục X thành trắng
+                  tick={{ fill: "white" }}
                 />
                 <YAxis
-                  tick={{ fill: "white" }} // Đổi màu chữ trục Y thành trắng
+                  tick={{ fill: "white" }}
                   tickFormatter={(value) =>
                     value.toLocaleString("vi-VN", {
                       style: "currency",

@@ -1,6 +1,4 @@
 import axiosInstance from "./axiosInstance";
-
-// Tạo danh mục mới
 export const createCategory = async (categoryData) => {
   try {
     const response = await axiosInstance.post(
@@ -14,7 +12,6 @@ export const createCategory = async (categoryData) => {
   }
 };
 
-// Lấy danh sách danh mục
 export const getCategory = async () => {
   try {
     const response = await axiosInstance.get("Category/get-category");
@@ -25,7 +22,6 @@ export const getCategory = async () => {
   }
 };
 
-// Xóa danh mục
 export const deleteCategory = async (categoryId) => {
   try {
     const response = await axiosInstance.delete(
@@ -37,7 +33,7 @@ export const deleteCategory = async (categoryId) => {
     throw error;
   }
 };
-// Xóa danh mục
+
 export const getCategoryById = async (categoryId) => {
   try {
     const response = await axiosInstance.get(
@@ -49,7 +45,7 @@ export const getCategoryById = async (categoryId) => {
     throw error;
   }
 };
-// Xóa danh mục
+
 export const updateCategory = async (categoryData) => {
   try {
     const response = await axiosInstance.post(

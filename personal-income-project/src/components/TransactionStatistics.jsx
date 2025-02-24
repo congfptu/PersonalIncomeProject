@@ -70,7 +70,7 @@ const TransactionStatistics = () => {
   const [statistics, setStatistics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("year");
-  const [activeChart, setActiveChart] = useState("spend"); // "spend" or "collect"
+  const [activeChart, setActiveChart] = useState("spend");
 
   useEffect(() => {
     if (activeTab === "year") {
@@ -137,7 +137,6 @@ const TransactionStatistics = () => {
           Tổng quan tài chính thu nhập và chi tiêu
         </h2>
         <div className="flex flex-col items-center gap-2 w-full max-w-2xl p-4 bg-gray-800 rounded-lg">
-          {/* Tabs và DatePicker */}
           <div className="flex justify-between w-full gap-4">
             <div className="flex flex-1 gap-2">
               <button
@@ -162,7 +161,6 @@ const TransactionStatistics = () => {
               </button>
             </div>
 
-            {/* DatePicker */}
             <DatePicker
               className="h-10 w-40 text-center"
               picker={activeTab === "year" ? "year" : "month"}
@@ -185,7 +183,6 @@ const TransactionStatistics = () => {
             />
           </div>
 
-          {/* Tabs chọn Chi Tiêu / Thu Nhập */}
           <div className="flex w-full gap-2">
             <button
               className={`flex-1 px-4 py-2 rounded-r-md font-medium transition-all ${
@@ -209,7 +206,7 @@ const TransactionStatistics = () => {
             </button>
           </div>
         </div>
-        {/* Biểu đồ Chi Tiêu hoặc Thu Nhập */}
+
         <div className="flex flex-row justify-center items-start w-full max-w-4xl mt-8">
           <div className="mr-20">
             <Card
@@ -256,15 +253,14 @@ const TransactionStatistics = () => {
               </PieChart>
             </Card>
           </div>
-          {/* Danh sách chú thích */}
           <div
             className=""
             style={{
               padding: 10,
               border: "1px solid #555",
-              maxHeight: "550px", // Giới hạn chiều cao tối đa
-              backgroundColor: "#1f2937", // Nền tối hơn để dễ nhìn
-              borderRadius: "8px", // Bo góc mềm mại
+              maxHeight: "550px",
+              backgroundColor: "#1f2937",
+              borderRadius: "8px",
             }}
           >
             {(activeChart === "spend"

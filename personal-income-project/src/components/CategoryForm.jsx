@@ -31,7 +31,6 @@ import {
   HomeFilled,
 } from "@ant-design/icons";
 
-// Danh sách biểu tượng theo từng loại
 const icons = {
   income: [
     { name: "DollarCircleOutlined", icon: <DollarCircleOutlined /> },
@@ -79,7 +78,6 @@ const icons = {
   ],
 };
 
-// Danh sách màu sắc
 const colorOptions = [
   "#FFEB3B",
   "#FFCDD2",
@@ -124,12 +122,12 @@ const CategoryForm = ({ onSuccess }) => {
   const handleCategoryChange = (type) => {
     if (type != categoryType) {
       setCategoryType(type);
-      setSelectedIcon(null); // Reset icon
-      setColor(null); // Reset màu sắc mặc định
-      form.resetFields(); // Reset toàn bộ form
+      setSelectedIcon(null);
+      setColor(null);
+      form.resetFields();
     }
   };
-  // ✅ API chỉ gọi khi nhấn "Lưu"
+
   const handleSave = async (values) => {
     if (!selectedIcon) {
       message.warning("Vui lòng chọn biểu tượng!");
@@ -179,7 +177,6 @@ const CategoryForm = ({ onSuccess }) => {
             Tạo mới danh mục
           </h2>
 
-          {/* Chuyển đổi giữa Thu nhập & Chi tiêu */}
           <div className="flex justify-center mb-5">
             <button
               className={`w-1/2 py-2 text-lg font-semibold rounded-l-lg ${
@@ -206,7 +203,6 @@ const CategoryForm = ({ onSuccess }) => {
           </div>
 
           <Form layout="vertical" form={form} onFinish={handleSave}>
-            {/* Nhập tên danh mục */}
             <Form.Item
               name="name"
               label={
@@ -225,7 +221,6 @@ const CategoryForm = ({ onSuccess }) => {
               />
             </Form.Item>
 
-            {/* Chọn biểu tượng */}
             <Form.Item
               label={
                 <span className="text-white text-lg font-semibold">
@@ -238,7 +233,7 @@ const CategoryForm = ({ onSuccess }) => {
                 {icons[categoryType].map((item, index) => (
                   <button
                     key={index}
-                    type="button" // ✅ Không trigger form submit
+                    type="button"
                     onClick={() => setSelectedIcon(item.name)}
                     className={`w-12 h-12 flex items-center justify-center text-2xl rounded-md border transition-all duration-200 ${
                       selectedIcon === item.name
@@ -252,7 +247,6 @@ const CategoryForm = ({ onSuccess }) => {
               </div>
             </Form.Item>
 
-            {/* Chọn màu sắc */}
             <Form.Item
               label={
                 <span className="text-white text-lg font-semibold">
@@ -265,7 +259,7 @@ const CategoryForm = ({ onSuccess }) => {
                 {colorOptions.map((col, index) => (
                   <button
                     key={index}
-                    type="button" // ✅ Không trigger form submit
+                    type="button"
                     onClick={() => setColor(col)}
                     className="w-8 h-8 rounded-md transition-all duration-200"
                     style={{
@@ -278,7 +272,6 @@ const CategoryForm = ({ onSuccess }) => {
               </div>
             </Form.Item>
 
-            {/* Nút Lưu */}
             <Form.Item>
               <Button type="primary" htmlType="submit" loading={loading}>
                 Lưu
