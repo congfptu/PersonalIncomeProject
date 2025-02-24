@@ -8,7 +8,7 @@ const PrivateRoute = () => {
   useEffect(() => {
     if (!token) return setIsAuthenticated(false);
 
-    fetch("https://localhost:5001/api/auth/validate-token", {
+    fetch("http://localhost:5000/api/auth/validate-token", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
