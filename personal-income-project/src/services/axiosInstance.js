@@ -1,11 +1,10 @@
 import axios from "axios";
-
 // Lấy token từ sessionStorage
 const getToken = () => sessionStorage.getItem("access_token");
 
 // Tạo Axios instance
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 // Thêm Interceptor để tự động gắn token vào header
